@@ -1,0 +1,20 @@
+h1 Kittens
+
+p
+    a(href="/kittens/new") Register a new kitten
+
+ul
+    - kittens.forEach(function(kitten) {
+        li
+            a(id=kitten._id, href="/kittens/" + encodeURIComponent(kitten.name), style="width:300px; margin-left:10px")= kitten.name + "___"
+            span(id=kitten.colour, style="margin-left:10px")= kitten.colour + kitten.colour || 'Colour is not defined in the database'
+            span(style="margin-left:10px")=kitten._id || 'There is no id for the object'
+    - });
+ - if ( page > 0 ) {
+     a(href="?page=" + (page - 1)) Previous
+     &nbsp;
+ - }
+
+ - if ( ! lastPage) {
+     a(href="?page=" + (page + 1)) Next
+ - }
