@@ -9,6 +9,7 @@
 var async = require('async');
 
 var Kitten = require('../data/models/kitten');
+var loadKitten = require('./middleware/load_kitten');
 
 var maxKittensPerPage = 5;
 
@@ -50,5 +51,9 @@ module.exports = function(app) {
                 });
 
             });
+    });
+
+    app.get('/kittens/:id', loadKitten, function(req, res, next) {
+        res.render('kittens/profile', {title: 'Kitten profile', kitten: req.kitten, page: req.query.page});
     });
 }

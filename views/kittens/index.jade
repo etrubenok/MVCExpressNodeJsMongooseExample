@@ -1,20 +1,23 @@
-h1 Kittens
+extends ../layout
 
-p
-    a(href="/kittens/new") Register a new kitten
+block content
+    h1 Kittens
 
-ul
-    - kittens.forEach(function(kitten) {
-        li
-            a(id=kitten._id, href="/kittens/" + encodeURIComponent(kitten.name), style="width:300px; margin-left:10px")= kitten.name + "___"
-            span(id=kitten.colour, style="margin-left:10px")= kitten.colour + kitten.colour || 'Colour is not defined in the database'
-            span(style="margin-left:10px")=kitten._id || 'There is no id for the object'
-    - });
- - if ( page > 0 ) {
-     a(href="?page=" + (page - 1)) Previous
-     &nbsp;
- - }
+    p
+        a(href="/kittens/new") Register a new kitten
 
- - if ( ! lastPage) {
-     a(href="?page=" + (page + 1)) Next
- - }
+    ul
+        - kittens.forEach(function(kitten) {
+            li
+                a(id=kitten._id, href="/kittens/" + kitten._id + "?page=" + page, style="width:300px; margin-left:10px")= kitten.name + "___"
+                span(id=kitten.colour, style="margin-left:10px")= kitten.colour + kitten.colour || 'Colour is not defined in the database'
+                span(style="margin-left:10px")=kitten._id || 'There is no id for the object'
+        - });
+     - if ( page > 0 ) {
+         a(href="?page=" + (page - 1)) Previous
+         &nbsp;
+     - }
+
+     - if ( ! lastPage) {
+         a(href="?page=" + (page + 1)) Next
+     - }

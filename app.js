@@ -7,9 +7,12 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
-var persistence = require('./persistence/persistence');
+//var persistence = require('./persistence/persistence');
 
 var app = express();
+
+var dbUrl = 'mongodb://localhost/test';
+var db = require('mongoose').connect(dbUrl);
 
 var user = require('./routes/user');
 var kittens = require('./routes/kittens')(app);
@@ -33,7 +36,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-persistence.connect();
+//persistence.connect();
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

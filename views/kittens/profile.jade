@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    h1= "Kitten " + kitten.name
+
+    p
+        b= kitten.name + " | " + kitten.colour
+
+    a(href="/kittens/?page="+page) Back to the list
