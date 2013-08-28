@@ -11,11 +11,10 @@ var path = require('path');
 
 var app = express();
 
-var dbUrl = 'mongodb://localhost/test';
+var dbUrl = 'mongodb://mongodb.localhost/test';
 var db = require('mongoose').connect(dbUrl);
 
-var user = require('./routes/user');
-var kittens = require('./routes/kittens')(app);
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -27,6 +26,9 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
+var user = require('./routes/user');
+var kittens = require('./routes/kittens')(app);
 
 // development only
 if ('development' == app.get('env')) {

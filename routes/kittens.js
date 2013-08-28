@@ -53,7 +53,28 @@ module.exports = function(app) {
             });
     });
 
+    app.get('/kittens/new', function(req, res) {
+        res.render('kittens/new', {title: 'New kitten'});
+    });
+
     app.get('/kittens/:id', loadKitten, function(req, res, next) {
         res.render('kittens/profile', {title: 'Kitten profile', kitten: req.kitten, page: req.query.page});
+    });
+
+    app.post('/kittens', function(req, res, next) {
+        Kitten.findOne({name: req.body.name}, function(err, kitten) {
+            if (err) {
+                return next(err);
+            }
+            if ( kitten ) {
+                return res.send('Conflict', 409);
+            }
+            Kitten.create(req.body, function(err) {
+                if ( err ) {
+                    return next(err);
+                }
+                res.redirect('/kittens');
+            });
+        });
     });
 }
