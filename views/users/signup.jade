@@ -1,0 +1,17 @@
+block content
+    - if ( message ) {
+        p= message
+    - }
+        div
+            form(method="POST", action="/signup")
+                div
+                    label(for="email") Email:
+                    input#email(name="email")
+                div
+                    label(for="password") Password:
+                    input#password(name="password", type="password")
+                div
+                    label(for="confirmedPassword") Confirm password:
+                    input#confirmedPassword(name="confirmedPassword", type="password")
+                div
+                    input#login(type="submit", value="Sing Up")

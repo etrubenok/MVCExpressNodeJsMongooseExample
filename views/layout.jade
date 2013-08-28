@@ -4,4 +4,21 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    div
+       - if ( ! auth.isAuthenticated ) {
+           form(method="POST", action="/login")
+                span
+                    label(for="email") Email:
+                    input#email(name="email")
+                span
+                    label(for="password") Password:
+                    input#password(name="password", type="password")
+                span
+                    input#login(type="submit", value="Login")
+           span
+               |
+               a(href="/signup") Sign Up
+       - } else {
+            a(href="/logout") Log Out
+       - }
     block content
